@@ -9,16 +9,17 @@
 
 {% endfor %}
 
-
 <h1>
 	Ajout d'un nouveau restaurant :
 </h1>
 
-{% if form is defined %}
+{{form(formRestaurant)}}
 
-	{{ form_start(form)}}
-
-	<input type="submit" class="button button-green" value="Valider">
-
-	{{ form_end(form) }}
-{% endif %}
+	{# {% if form is defined %}
+	
+		{{ form_start(form)}}
+	
+		<input type="submit" class="button button-green" value="Valider">
+	
+		{{ form_end(form) }}
+	{% endif %} #}

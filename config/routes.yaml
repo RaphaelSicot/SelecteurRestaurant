@@ -4,6 +4,10 @@ controllers:
     namespace: App\Controller
   type: attribute
 
-app_selecteur_restaurant:
+app_restaurant:
   path: /Accueil
-  controller: App\Controller\AccueilController::array
+  controller: App\Controller\AccueilController::Restaurants
+
+app_add_restaurant:
+  path: /Accueil
+  controller: App\Controller\AccueilController::addRestaurant
