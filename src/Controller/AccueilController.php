@@ -21,15 +21,19 @@ class AccueilController extends AbstractController
         //Création du tableau de restaurants
         $restaurants = array(1 => 'Burger King', 2 => 'Delarte', 3 => 'KFC', 4 => 'Subway');
 
-
+        //Création du formulaire
         $form = $this->createFormBuilder($task)
-            ->add('task', TextType::class, ['label' => 'Nom du restaurant :'])
+            ->add('task', TextType::class, ['label' => 'Nom du restaurant :'], ['attr' => ['placeholder' => "Titre du restaurant", 'class' => 'form-control']])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer le restaurant'])
             ->getForm();
 
-        //Création du tableau de restaurants
-        $restaurants = array(1 => 'Burger King', 2 => 'Delarte', 3 => 'KFC', 4 => 'Subway');
+        $form->handleRequest($request);
 
+        //Si le formulaire est valide on ajoute le nom du restaurant à la liste des restaurants
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            array_push($restaurants, $form->get('task')->getData());
+        }
         //Renvoi du modèle twig de la page d'accueil
 
         return $this->render('Accueil.html.twig', [
