@@ -20,6 +20,7 @@ class AccueilController extends AbstractController
 
         //Création du tableau de restaurants
         $restaurants = array(1 => 'Burger King', 2 => 'Delarte', 3 => 'KFC', 4 => 'Subway');
+        $restaurant =  $restaurants[array_rand($restaurants)];
 
         //Création du formulaire
         $form = $this->createFormBuilder($task)
@@ -32,11 +33,23 @@ class AccueilController extends AbstractController
         //Si le formulaire est valide on ajoute le nom du restaurant à la liste des restaurants
         if ($form->isSubmitted() && $form->isValid()) {
 
-            array_push($restaurants, $form->get('task')->getData());
+            if (array_push($restaurants, $form->get('task')->getData())) {
+                return $this->redirect($request->getUri());
+            }
         }
+
+
+        if (isset($_POST['go'])) {
+            return $this->render('Accueil.html.twig', [
+                'restaurant' => $restaurant,
+            ]);
+        }
+
+
         //Renvoi du modèle twig de la page d'accueil
 
         return $this->render('Accueil.html.twig', [
+            'restaurant' => $restaurant,
             'restaurants' => $restaurants,
             'formRestaurant' => $form->createView(),
         ]);
