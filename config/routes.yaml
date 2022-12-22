@@ -1,13 +1,9 @@
+homepage:
+  path: /Accueil
+  controller: App\Controller\AccueilController::addRestaurant
+
 controllers:
   resource:
     path: ../src/Controller/
     namespace: App\Controller
   type: attribute
-
-app_restaurant:
-  path: /Accueil
-  controller: App\Controller\AccueilController::Restaurants
-
-app_add_restaurant:
-  path: /Accueil
-  controller: App\Controller\AccueilController::addRestaurant
