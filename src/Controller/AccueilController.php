@@ -8,12 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class AccueilController extends AbstractController
 {
 
-    public function addRestaurant(Request $request): Response
+    public function addRestaurant(Request $request, PersistenceManagerRegistry $doctrine): Response
     {
         //Initialisation 
         $task = new Task();
@@ -33,8 +33,13 @@ class AccueilController extends AbstractController
         //Si le formulaire est valide on ajoute le nom du restaurant à la liste des restaurants
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Enregistrement en BDD
+            $em = $doctrine->getManager();
+
             if (array_push($restaurants, $form->get('task')->getData())) {
-                return $this->redirect($request->getUri());
+                $em->persist($task);
+                $em->flush();
+                $this->addFlash('notice', 'Restaurant enregistré!!');
             }
         }
 
