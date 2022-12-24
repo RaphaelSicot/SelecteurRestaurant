@@ -43,11 +43,10 @@ class AccueilController extends AbstractController
             }
         }
 
-
+        //On clique sur le bouton pour pouvoir lancer une sélection aléatoire d'un restaurant
         if (isset($_POST['go'])) {
-            return $this->render('Accueil.html.twig', [
-                'restaurant' => $restaurant,
-            ]);
+
+            $restaurant =  $restaurants[array_rand($restaurants)];
         }
 
 
