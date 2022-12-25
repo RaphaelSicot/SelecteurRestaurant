@@ -13,17 +13,17 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 class AccueilController extends AbstractController
 {
 
+    // Fonction d'ajout de restaurant
     public function addRestaurant(Request $request, PersistenceManagerRegistry $doctrine): Response
     {
-        //Initialisation 
+        //Initialisation des variables
         $task = new Task();
         $restaurant = '';
 
-        //Création du tableau de restaurants
-        // $restaurants = array(1 => 'Burger King', 2 => 'Delarte', 3 => 'KFC', 4 => 'Subway');
+        // Référentiel permettant 
         $repository = $doctrine->getRepository(Task::class);
 
-        // look for *all* Product objects
+        // Récupération de tout les restaurants de la BDD 
         $restaurants = $repository->findAll();
 
         //Création du formulaire
@@ -32,6 +32,7 @@ class AccueilController extends AbstractController
             ->add('save', SubmitType::class, ['label' => 'Enregistrer le restaurant'])
             ->getForm();
 
+        //Gestion traitement de la saisie du formulaire
         $form->handleRequest($request);
 
         //Si le formulaire est valide on ajoute le nom du restaurant à la liste des restaurants
@@ -50,10 +51,8 @@ class AccueilController extends AbstractController
                     ->getForm();
 
                 // return $this -> redirectToRoute('/Accueil)
-
             }
         }
-
 
         //On clique sur le bouton pour pouvoir lancer une sélection aléatoire d'un restaurant
         if (isset($_POST['go'])) {
