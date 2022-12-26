@@ -26,8 +26,15 @@
 	Affichage aléatoire d'un restaurant :
 </h1>
 
-<input type="submit" value="lancer la sélection aléatoire" name="go"/>
+<button class="btn btn-default" id="go">
+	Lancer la sélection aléatoire
+</button>
+{% for restaurant in restaurants %}
 
-<p>
+
+	{% set restaurant = random(restaurants)%}
+
+
 	{{restaurant}}
-</p>
+
+{% endfor %}

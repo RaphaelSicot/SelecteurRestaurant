@@ -13,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 class AccueilController extends AbstractController
 {
 
+
     // Fonction d'ajout de restaurant
     public function addRestaurant(Request $request, PersistenceManagerRegistry $doctrine): Response
     {
@@ -55,11 +56,10 @@ class AccueilController extends AbstractController
         }
 
         //On clique sur le bouton pour pouvoir lancer une sélection aléatoire d'un restaurant
-        if (isset($_POST['go'])) {
+        // if (isset($_POST['go'])) {
 
-            $restaurant =  $restaurants[array_rand($restaurants)];
-        }
-
+        //     $restaurant =  $restaurants[array_rand($restaurants)];
+        // }
         //Renvoi du modèle twig de la page d'accueil
 
         return $this->render('Accueil.html.twig', [
